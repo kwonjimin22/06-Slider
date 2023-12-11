@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>슬라이더 기본</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      ul,
+      ol,
+      li {
+        list-style: none;
+      }
+      img {
+        vertical-align: top;
+      }
+      .slider-wrap {
+        width: 1000px;
+        margin: 50px auto;
+        border: 5px solid #000;
+        overflow: hidden;
+      }
+      .slider-wrap .slider {
+        display: flex;
+      }
+      .slider-wrap .slider li {
+        /* border: 1px solid #f00; */
+        width: 1000px;
+        height: 400px;
+        flex-shrink: 0; /* 플렉스의 아이템이면 shrink(줄어든다)되는데 0으로 하면 안줄어들음*/
+      }
+      .slider-wrap .slider li img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      $(function () {
+        // 대상을 변수에 저장
+        const $slider = $('.slider');
+
+        // 3초에 한번씩 반복
+        // setInterval(동작, 시간);
+        setInterval(function () {
+          // 기본 동작 : animate({옵션}, 지속시간, 콜백함수)
+          $slider.animate(
+            {
+              marginLeft: -1000,
+            },
+            600,
+            function () {
+              // console.log('슬라이딩!');
+              // 넣을요소.appendTo(대상)
+              $slider.find('li').first().appendTo($slider);
+              $slider.css('margin-left', 0);
+            }
+          );
+        }, 3000);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="slider-wrap">
+      <ul class="slider">
+        <li><img src="./img/newjeans01.jpg" alt="" /></li>
+        <li><img src="./img/newjeans02.jpg" alt="" /></li>
+        <li><img src="./img/newjeans03.jpg" alt="" /></li>
+        <li><img src="./img/newjeans04.jpg" alt="" /></li>
+      </ul>
+    </div>
+  </body>
+</html>
